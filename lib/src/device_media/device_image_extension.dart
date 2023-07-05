@@ -36,14 +36,15 @@ extension DeviceImageExtension on BuildContext {
     return showModelUpdatePhoto<T?>(CropType.circle);
   }
 
-  void _onTapGallery(bool useCrop) {
-    PermissionService.checkGallery().then(
+  void _onTapGallery(
+      {bool useCrop = false, CropType cropType = CropType.circle}) {
+    PermissionService.askGallery().then(
       (value) {
         if (value == true) {
           pickedImage(
             DeviceMediaSource.gallery,
             needCrop: useCrop,
-            // cropType: type,
+            cropType: cropType,
           ).then((value) => Navigator.of(this).pop(value));
         } else {
           Navigator.of(this).pop();
@@ -62,11 +63,13 @@ extension DeviceImageExtension on BuildContext {
     );
   }
 
-  void _onTapCamera(bool useCrop) {
-    PermissionService.checkCamera().then(
+  void _onTapCamera(
+      {bool useCrop = false, CropType cropType = CropType.circle}) {
+    PermissionService.askCamera().then(
       (value) {
         if (value == true) {
-          pickedImage(DeviceMediaSource.camera, needCrop: useCrop)
+          pickedImage(DeviceMediaSource.camera,
+                  needCrop: useCrop, cropType: cropType)
               .then((value) => Navigator.of(this).pop(value));
         } else {
           Navigator.of(this).pop();
@@ -104,7 +107,7 @@ extension DeviceImageExtension on BuildContext {
               children: [
                 GestureDetector(
                   behavior: HitTestBehavior.translucent,
-                  onTap: () => _onTapGallery(false),
+                  onTap: () => _onTapGallery(useCrop: true),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -133,7 +136,7 @@ extension DeviceImageExtension on BuildContext {
                 const Divider(),
                 GestureDetector(
                   behavior: HitTestBehavior.translucent,
-                  onTap: () => _onTapCamera(false),
+                  onTap: () => _onTapCamera(useCrop: true),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
