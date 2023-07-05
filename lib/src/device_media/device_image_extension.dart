@@ -38,7 +38,7 @@ extension DeviceImageExtension on BuildContext {
 
   void _onTapGallery(
       {bool useCrop = false, CropType cropType = CropType.circle}) {
-    PermissionService.askGallery().then(
+    PermissionService.requestPermission(Permission.photos).then(
       (value) {
         if (value == true) {
           pickedImage(
