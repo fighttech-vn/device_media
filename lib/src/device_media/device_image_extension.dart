@@ -2,6 +2,7 @@ import 'package:easy_device_media/device_media.dart';
 import 'package:flutter/material.dart';
 import 'package:imagewidget/imagewidget.dart';
 
+import '../extension/alert_dialog.dart';
 import '../l10n/l10n.dart';
 import '../services/permission_service.dart';
 
@@ -45,8 +46,16 @@ extension DeviceImageExtension on BuildContext {
             // cropType: type,
           ).then((value) => Navigator.of(this).pop(value));
         } else {
-          PermissionService.askGallery().then((value) {
-            _onTapGallery(useCrop);
+          Navigator.of(this).pop();
+          startAlert(
+            title: 'Notificaiton',
+            content: 'Please grant permission in settings',
+            text1: 'OK',
+            text2: 'Go to Settings',
+          ).then((value) {
+            if (value == false) {
+              PermissionService.openSetting();
+            }
           });
         }
       },
@@ -60,8 +69,16 @@ extension DeviceImageExtension on BuildContext {
           pickedImage(DeviceMediaSource.camera, needCrop: useCrop)
               .then((value) => Navigator.of(this).pop(value));
         } else {
-          PermissionService.askCamera().then((value) {
-            _onTapCamera(useCrop);
+          Navigator.of(this).pop();
+          startAlert(
+            title: 'Notificaiton',
+            content: 'Please grant permission in settings',
+            text1: 'OK',
+            text2: 'Go to Settings',
+          ).then((value) {
+            if (value == false) {
+              PermissionService.openSetting();
+            }
           });
         }
       },
