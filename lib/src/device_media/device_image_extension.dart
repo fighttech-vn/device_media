@@ -1,8 +1,10 @@
 import 'package:easy_device_media/device_media.dart';
 import 'package:flutter/material.dart';
 import 'package:imagewidget/imagewidget.dart';
+import 'package:universal_platform/universal_platform.dart';
 
-import '../extension/alert_dialog.dart';
+import '../core/alert_dialog.dart';
+import '../core/core.dart';
 import '../l10n/l10n.dart';
 import '../services/permission_service.dart';
 
@@ -38,7 +40,8 @@ extension DeviceImageExtension on BuildContext {
 
   void _onTapGallery(
       {bool useCrop = false, CropType cropType = CropType.circle}) {
-    PermissionService.requestPermission(Permission.photos).then(
+    (UniversalPlatform.isIOS ? PermissionService.askGallery() : isYesDefault())
+        .then(
       (value) {
         if (value == true) {
           pickedImage(

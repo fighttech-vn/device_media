@@ -1,7 +1,7 @@
 name: device_media
 description: Easy setup pick image and camera
 version: 0.0.1
-homepage: 
+homepage: https://tech.fighttech.vn/
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
@@ -12,14 +12,13 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: 0.18.0
   
-  plugin_platform_interface: ^2.0.2
-
+  intl: 0.18.0
   imagewidget: ^1.0.11
-  easy_device_media: ^0.0.6
-
+  universal_platform: ^1.0.0+1
   permission_handler: ^10.2.0
+  
+  easy_device_media: ^0.0.6
 
 dev_dependencies:
   flutter_test:
