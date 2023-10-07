@@ -34,6 +34,10 @@ extension DeviceImageExtension on BuildContext {
     return showModelUpdatePhoto<T?>(CropType.rectangle);
   }
 
+  Future<T?> showUploadImage<T>() async {
+    return showModelUpdatePhoto<T?>(CropType.rectangle, useCrop: false);
+  }
+
   Future<T?> showUpdateAvatar<T>() async {
     return showModelUpdatePhoto<T?>(CropType.circle);
   }
@@ -110,7 +114,7 @@ extension DeviceImageExtension on BuildContext {
               children: [
                 GestureDetector(
                   behavior: HitTestBehavior.translucent,
-                  onTap: () => _onTapGallery(useCrop: true),
+                  onTap: () => _onTapGallery(useCrop: useCrop),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -139,7 +143,7 @@ extension DeviceImageExtension on BuildContext {
                 const Divider(),
                 GestureDetector(
                   behavior: HitTestBehavior.translucent,
-                  onTap: () => _onTapCamera(useCrop: true),
+                  onTap: () => _onTapCamera(useCrop: useCrop),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
